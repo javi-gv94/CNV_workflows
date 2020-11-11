@@ -12,7 +12,6 @@ inputs:
   reference_fasta: {type: File, doc: "Reference Genome"}
 
 outputs:
-  paired_reads: {type: 'File[]', outputSource: rawdata_trimming/paired_reads}
   aligned_bam: {type: 'File[]', outputSource: alignment_to_reference/aligned_bam}
   bed_file: {type: File, outputSource: final_filtering/bed_file}
 
@@ -22,8 +21,7 @@ steps:
     run: tools/bwa_mem.cwl
     in:
       reference_genome: reference_fasta
-      input_reads:
-        source: rawdata_trimming/paired_reads
+      input_reads: fastq_files
     out: [aligned_bam]
 
   picard_markduplicates:
