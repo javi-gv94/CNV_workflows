@@ -17,7 +17,8 @@ hints:
 steps:
 
 
-    CollectCoverage per sample
+    CollectCoverage
+        
         baseCommand: [ java -jar -Xmx${command_mem_mb}m ${gatk_local_jar} \
             -T DepthOfCoverage -I ${bamlist} -L $BED -R $REF \
             -dt BY_SAMPLE -dcov 5000 -l INFO --omitDepthOutputAtEachBase --omitLocusTable \
@@ -212,8 +213,7 @@ steps:
             position: '--PCAfiles'
 
         outputs:
-        output_1:
-            normalized:
+        normalized:
             type: File[]
             inputBinding:
               prefix: '--normalizeOutput'
@@ -310,3 +310,19 @@ steps:
 
         #############
 
+
+requirements:
+  ScatterFeatureRequirement: {}
+
+inputs:
+  message_array: string[] 
+
+steps:
+  echo:
+    run: 1st-tool.cwl
+    scatter: message
+    in:
+      message: message_array
+    out: []
+
+outputs: []
