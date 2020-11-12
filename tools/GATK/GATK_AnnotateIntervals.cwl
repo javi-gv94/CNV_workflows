@@ -1,16 +1,16 @@
 cwlVersion: v1.0
 class: CommandLineTool
-id: PreprocessIntervals
+id: AnnotateIntervals
 
 doc: |
-  PreprocessIntervals
-  PROCESS INTERVALS: For exome data, pad target regions, e.g. with 250 bases.
+  ANNOTATE AND FILTER INTERVALS with features and subset regions of interest with FilterIntervals
+  AnnotateIntervals with GC content
 
 requirements:
   DockerRequirement:
     dockerPull: 'hub.docker.com/broadinstitute/gatk:4.1.5.0'
 
-baseCommand: [gatk, PreprocessIntervals]
+baseCommand: [gatk, AnnotateIntervals]
 
 inputs:
   ref_genome:
@@ -23,11 +23,6 @@ inputs:
     inputBinding:
       position: 2
       prefix: "-L"
-  bin-length:
-    type: int
-    default: 0
-    inputBinding:
-      prefix: --bin-length
   imr:
     type: string
     default: OVERLAPPING_ONLY
@@ -36,8 +31,8 @@ inputs:
 
 
 outputs:
-  processed_bed:
+  GCannot_table:
     type: File
     outputBinding:
-      glob: $(inputs.exomes_bed.basename).preprocessed.interval_list
+      glob: $(inputs.exomes_bed.basename).annotated.tsv
       prefix: "-O"

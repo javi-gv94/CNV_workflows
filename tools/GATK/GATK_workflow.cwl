@@ -1,5 +1,5 @@
 cwlVersion: v1.0
-class: CommandLineTool
+class: Workflow
 id: GATK_workflow_BP
 
 doc: |
@@ -21,8 +21,15 @@ steps:
   PreprocessIntervals:
     run: GATK_PreprocessIntervals.cwl
     in:
-      reference_genome: reference_fasta
-      input_reads: fastq_files
-    out: [aligned_bam]
+      ref_genome: reference_fasta
+      exomes_bed: exome_files
+    out: [processed_bed]
+  
+  AnnotateIntervals:
+    run: AnnotateIntervals.cwl
+    in:
+      ref_genome: reference_fasta
+      exomes_bed: PreprocessIntervals/processed_bed
+    out: [GCannot_table]
 
  
