@@ -10,20 +10,22 @@ requirements:
 baseCommand: [xhmm, --normalize, --PCnormalizeMethod, PVE_mean, --PVE_mean_factor, 0.7]
 
 inputs:
-pca_file:
+  pca_file:
     type: File
     inputBinding:
       prefix: '--PCAfiles'
 
-filtered_centered:
+  filtered_centered:
     type: File
     inputBinding:
       prefix: '-r'
 
 outputs:
-pca_normalized:
+  normalized_counts:
     type: String
-    inputBinding:
+    outputBinding:
       prefix: '--normalizeOutput'
+      glob: $(inputs.filtered_centered.basename)"_PCAnormalized.txt"
+
 
 

@@ -11,7 +11,7 @@ baseCommand: [xhmm, --matrix, --centerData, --centerType, sample, --zScoreData, 
 
 
 inputs:
-  pca_normalized:
+  normalized_counts:
     type: File
     inputBinding:
       prefix: '-r'
@@ -21,14 +21,17 @@ outputs:
     type: String
     inputBinding:
       prefix: '-o'
+      glob: $(inputs.normalized_counts.basename)_zscores.txt
 
   outputExcludedTargets:
-      type: File
-      inputBinding:
-        prefix: '-outputExcludedTargets'
+    type: File
+    inputBinding:
+      prefix: '-outputExcludedTargets'
+      glob: $(inputs.normalized_counts.basename)_filtered_targets_zscores.txt
 
   outputExcludedSamples:
-      type: File
-      inputBinding:
-        prefix: '-outputExcludedSamples'
+    type: File
+    inputBinding:
+      prefix: '-outputExcludedSamples'
+      glob: $(inputs.normalized_counts.basename)_filtered_samples_zscores.txt
 

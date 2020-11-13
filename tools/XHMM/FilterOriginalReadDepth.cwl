@@ -11,7 +11,7 @@ baseCommand: [xhmm, --matrix]
 
 
 inputs:
-  pca_normalized:
+  merged_depth:
     type: File
     inputBinding:
       prefix: '-r'
@@ -26,9 +26,10 @@ inputs:
 
 
 outputs:
-  FilteredRawData:
+  filtered_rawdata:
     type: String
     inputBinding:
       prefix: '-o'
+      glob: $(inputs.merged_depth.basename)_filtered.txt
 
 

@@ -16,7 +16,7 @@ inputs:
       type: array
       items: File[]
       inputBinding:
-        prefix: -GATKdepths
+        prefix: --GATKdepths
         separate: false
     inputBinding:
       position: 2

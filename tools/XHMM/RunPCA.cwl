@@ -17,7 +17,8 @@ filtered_centered:
 
 
 outputs:
-panel_of_normals:
+pca_file:
     type: String
-    inputBinding:
+    outputBinding:
       prefix: '--PCAfiles'
+      glob: $(inputs.filtered_centered.basename)"_PCA.txt"
